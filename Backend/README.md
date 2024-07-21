@@ -173,13 +173,5 @@ For example, to deploy to Heroku:
 - **API Request Failures**: Check the server logs for error messages and ensure the backend server is running.
 - **Environment Variables**: Ensure all required environment variables are set correctly.
 
-## Contributing
 
-Contributions are welcome! Please follow these steps to contribute:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a pull request.
 
