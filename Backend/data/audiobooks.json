@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Audiobook 1",
+    "author": "Author 1",
+    "coverImage": "/images/audiobook1.jpg",
+    "description": "Description for audiobook 1",
+    "genre": "Genre 1",
+    "rating": 4.5
+  },
+  {
+    "title": "Audiobook 2",
+    "author": "Author 2",
+    "coverImage": "/images/audiobook2.jpg",
+    "description": "Description for audiobook 2",
+    "genre": "Genre 2",
+    "rating": 4.0
+  }
+]
