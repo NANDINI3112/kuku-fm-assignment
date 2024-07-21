@@ -140,17 +140,6 @@ To deploy the frontend application:
 - Check the browser console for any errors and debug accordingly.
 - Ensure the backend server is running and accessible if you encounter issues with API requests.
 
-## Contributing
 
-Contributions are welcome! Please follow these steps to contribute:
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
 
