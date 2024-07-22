@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
-const audiobookSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  coverImage: String,
-  description: String,
-  genre: String,
-  rating: Number,
+const AudiobookSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  author: { type: String, required: true },
+  coverImage: { type: String, required: true },
+  genre: { type: String, required: true },
+  description: { type: String, required: true },
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 });
 
-module.exports = mongoose.model('Audiobook', audiobookSchema);
+module.exports = mongoose.model('Audiobook', AudiobookSchema);
