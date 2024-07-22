@@ -1,20 +1,24 @@
 const Review = require('../models/Review');
 const Audiobook = require('../models/Audiobook');
 
+// Add a review to an audiobook
 exports.addReview = async (req, res) => {
   const { rating, comment } = req.body;
-  const audiobook = await Audiobook.findById(req.params.id);
+  const { id } = req.params;
 
-  const review = new Review({
-    audiobook: audiobook._id,
-    rating,
-    comment,
-  });
+  try {
+    const audiobook = await Audiobook.findById(id);
+    if (!audiobook) return res.status(404).json({ message: 'Audiobook not found' });
 
-  await review.save();
+    const review = new Review({ audiobook: id, rating, comment });
+    await review.save();
 
-  audiobook.reviews.push(review);
-  await audiobook.save();
+    audiobook.reviews.push(review._id);
+    await audiobook.save();
 
-  res.status(201).json(review);
+    res.status(201).json(review);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
+
