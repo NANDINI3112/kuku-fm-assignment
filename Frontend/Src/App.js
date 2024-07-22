@@ -1,21 +1,25 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AudiobookList from './components/AudiobookList';
-import AudiobookDetails from './components/AudiobookDetails';
-import './styles/App.css';
+import AudiobookDetail from './components/AudiobookDetail';
+import ReviewForm from './components/ReviewForm';
 
-const App = () => {
+function App() {
   return (
-    <div className="container mt-5">
-      <h1 className="app-title text-center">Audiobook Review App</h1>
-      <Router>
+    <Router>
+      <div>
+        <ToastContainer />
         <Switch>
-          <Route path="/" exact component={AudiobookList} />
-          <Route path="/audiobooks/:id" component={AudiobookDetails} />
+          <Route exact path="/" component={AudiobookList} />
+          <Route path="/audiobooks/:id" component={AudiobookDetail} />
+          <Route path="/audiobooks/:id/review" component={ReviewForm} />
         </Switch>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
-};
+}
 
 export default App;
