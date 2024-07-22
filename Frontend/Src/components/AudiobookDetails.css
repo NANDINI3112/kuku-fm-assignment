@@ -1,0 +1,47 @@
+.audiobook-details-container {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.audiobook-details-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.audiobook-cover {
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.audiobook-info {
+  max-width: 600px;
+}
+
+.audiobook-info p {
+  margin-bottom: 1rem;
+  color: #6c757d;
+}
+
+.reviews-list {
+  list-style: none;
+  padding: 0;
+}
+
+.review-item {
+  background-color: #fff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-rating {
+  color: #007bff;
+}
+
+.review-comment {
+  color: #6c757d;
+}
