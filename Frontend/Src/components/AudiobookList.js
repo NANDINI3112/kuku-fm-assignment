@@ -1,60 +1,56 @@
+// src/components/AudiobookList.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './AudiobookList.css';
+import './App.css';
 
 const AudiobookList = () => {
   const [audiobooks, setAudiobooks] = useState([]);
-  const [filters, setFilters] = useState({ genre: '', author: '', rating: '' });
+  const [genre, setGenre] = useState('');
+  const [author, setAuthor] = useState('');
 
   useEffect(() => {
-    axios.get('/api/audiobooks').then((response) => {
-      setAudiobooks(response.data);
-    });
+    axios.get('/api/audiobooks')
+      .then(response => setAudiobooks(response.data))
+      .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  const applyFilters = () => {
-    axios
-      .get('/api/audiobooks', { params: filters })
-      .then((response) => setAudiobooks(response.data));
-  };
+  const handleGenreChange = (e) => setGenre(e.target.value);
+  const handleAuthorChange = (e) => setAuthor(e.target.value);
+
+  const filteredAudiobooks = audiobooks.filter(book => 
+    (genre ? book.genre === genre : true) &&
+    (author ? book.author === author : true)
+  );
 
   return (
-    <div className="audiobook-list-container">
-      <h1 className="text-center mt-5 mb-5">Audiobook List</h1>
-      <div className="filter-container mb-4">
+    <div className="container">
+      <h1 className="my-4">Audiobooks</h1>
+      <div className="filters mb-4">
+        <select className="form-select" onChange={handleGenreChange}>
+          <option value="">All Genres</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          {/* Add more genres as needed */}
+        </select>
         <input
           type="text"
-          placeholder="Genre"
-          className="filter-input"
-          value={filters.genre}
-          onChange={(e) => setFilters({ ...filters, genre: e.target.value })}
+          className="form-control"
+          placeholder="Filter by Author"
+          onChange={handleAuthorChange}
         />
-        <input
-          type="text"
-          placeholder="Author"
-          className="filter-input"
-          value={filters.author}
-          onChange={(e) => setFilters({ ...filters, author: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Rating"
-          className="filter-input"
-          value={filters.rating}
-          onChange={(e) => setFilters({ ...filters, rating: e.target.value })}
-        />
-        <button className="btn btn-primary" onClick={applyFilters}>Apply Filters</button>
       </div>
       <div className="row">
-        {audiobooks.map((audiobook) => (
-          <div className="col-md-4 mb-4" key={audiobook.id}>
-            <div className="card h-100">
-              <img src={audiobook.coverImage} className="card-img-top" alt={audiobook.title} />
+        {filteredAudiobooks.map(book => (
+          <div key={book.id} className="col-md-4">
+            <div className="card mb-4 shadow-sm">
+              <img src={book.coverImage} className="card-img-top" alt={book.title} />
               <div className="card-body">
-                <h5 className="card-title">{audiobook.title}</h5>
-                <p className="card-text">{audiobook.author}</p>
-                <Link to={`/audiobooks/${audiobook.id}`} className="btn btn-primary">Details</Link>
+                <h5 className="card-title">{book.title}</h5>
+                <p className="card-text">{book.author}</p>
+                <Link to={`/audiobooks/${book.id}`} className="btn btn-primary">View Details</Link>
               </div>
             </div>
           </div>
