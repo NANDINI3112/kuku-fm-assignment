@@ -1,17 +1,22 @@
 const Audiobook = require('../models/Audiobook');
 
-exports.getAudiobooks = async (req, res) => {
-  const { genre, author, rating } = req.query;
-  let filters = {};
-  if (genre) filters.genre = genre;
-  if (author) filters.author = author;
-  if (rating) filters.rating = { $gte: rating };
-
-  const audiobooks = await Audiobook.find(filters).populate('reviews');
-  res.json(audiobooks);
+// Get all audiobooks
+exports.getAllAudiobooks = async (req, res) => {
+  try {
+    const audiobooks = await Audiobook.find().populate('reviews');
+    res.json(audiobooks);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
+// Get a single audiobook by ID
 exports.getAudiobookById = async (req, res) => {
-  const audiobook = await Audiobook.findById(req.params.id).populate('reviews');
-  res.json(audiobook);
+  try {
+    const audiobook = await Audiobook.findById(req.params.id).populate('reviews');
+    if (!audiobook) return res.status(404).json({ message: 'Audiobook not found' });
+    res.json(audiobook);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
